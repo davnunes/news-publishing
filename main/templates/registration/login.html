@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %} News {% endblock %}
+{% block content %}
+    <h3>Publisher's portal</h3>
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">{{ form.username.label }}</label>
+            {{ form.username }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{{ form.password.label }}</label>
+            {{ form.password }}
+        </div>
+        <button type="submit" class="btn btn-primary">Sign In</button>
+    </form>
+{% endblock %}

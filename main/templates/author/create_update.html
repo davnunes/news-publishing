@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    <form action="{% if '/author/update/' in request.path %} {% url 'author_update' author.id %} {% else %} {% url 'author_create' %} {% endif %}" method="POST">
+        {% csrf_token %}
+        <div class="d-flex justify-content-between">
+            <h3 class="mb-0 align-self-center">
+                {% if 'author/update/' in request.path %}
+                    Update author -
+                    <span class="text-danger d-inline-block text-truncate" style="max-width: 600px;margin: -7px 0;">#{{ author.id }} | {{ author }}</span>
+                {% else %}
+                    Create a author
+                {% endif %}
+            </h3>
+        </div>
+        <hr>
+        {% for field in form %}
+            <div class="mb-3">
+                <label>{{ field.label }}</label>
+                {{ field }}
+            </div>
+        {% endfor %}
+        <a href="{% url 'author_list' %}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Back to home</a>
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+{% endblock %}
